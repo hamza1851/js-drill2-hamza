@@ -9,7 +9,7 @@ function interestGames(usersObj) {
     if (!users[namesArr[i]].interests[0]) continue
 
     const interestArr = users[namesArr[i]].interests[0]
-    const myRegex = /Playing Video Games/i
+    const myRegex = /Video Games/i
     if (myRegex.test(interestArr)) {
       return namesArr[i]
     } else {
