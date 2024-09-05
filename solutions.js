@@ -1,8 +1,13 @@
 const { users } = require("./users.js")
 
 function interestGames(usersObj) {
+  if (!usersObj || typeof usersObj !== "object") return "Send user data"
+  if (!Object.keys(usersObj)) return "Property does not exist"
+
   const namesArr = Object.keys(usersObj)
   for (let i = 0; i < namesArr.length; i++) {
+    if (!users[namesArr[i]].interests[0]) continue
+
     const interestArr = users[namesArr[i]].interests[0]
     const myRegex = /Playing Video Games/i
     if (myRegex.test(interestArr)) {
@@ -14,9 +19,14 @@ function interestGames(usersObj) {
 }
 
 function userInGermany(usersObj) {
+  if (!usersObj || typeof usersObj !== "object") return "Send user data"
+  if (!Object.keys(usersObj)) return "Property does not exist"
+
   const userNames = Object.keys(usersObj)
   const germanUser = []
   for (let i = 0; i < userNames.length; i++) {
+    if (!usersObj[userNames[i]].nationality) continue
+
     const nationality = usersObj[userNames[i]].nationality
     if (nationality === "Germany") germanUser.push(userNames[i])
   }
@@ -24,9 +34,13 @@ function userInGermany(usersObj) {
 }
 
 function userWithMasterDeg(usersObj) {
+  if (!usersObj || typeof usersObj !== "object") return "Send user data"
+  if (!Object.keys(usersObj)) return "Property does not exist"
+
   const userNames = Object.keys(usersObj)
   const userWithMasters = []
   for (let i = 0; i < userNames.length; i++) {
+    if (!usersObj[userNames[i]].qualification) continue
     if (usersObj[userNames[i]].qualification === "Masters")
       userWithMasters.push(userNames[i])
   }
@@ -36,6 +50,9 @@ function userWithMasterDeg(usersObj) {
 }
 
 function userBasedOnProgLang(usersObj) {
+  if (!usersObj || typeof usersObj !== "object") return "Send user data"
+  if (!Object.keys(usersObj)) return "Property does not exist"
+
   const userNames = Object.keys(usersObj)
   const pythonRegex = /Python/i
   const jsRegex = /Javascript/i
@@ -45,6 +62,8 @@ function userBasedOnProgLang(usersObj) {
   const golangUsers = []
 
   for (let i = 0; i < userNames.length; i++) {
+    if (!usersObj[userNames[i]].desgination) continue
+
     const userDesignation = usersObj[userNames[i]].desgination
     if (pythonRegex.test(userDesignation)) {
       pythonUsers.push(userNames[i])
@@ -54,6 +73,7 @@ function userBasedOnProgLang(usersObj) {
       jsUsers.push(userNames[i])
     } else continue
   }
+
   return { pythonUsers, golangUsers, jsUsers }
 }
 
